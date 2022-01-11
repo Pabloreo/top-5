@@ -9,63 +9,13 @@ import CardSofa from '../components/cardSofa';
 import '../styles/index.css';
 
 const IndexPage = () => {
-  const data = [
-    {
-      title: 'SOFÁ WORCESTER',
-      rating: 5,
-      position: 1,
-      description: [
-        'Elegancia y confort.',
-        'Asiento amplio y respaldo firme.',
-        'Maderas certificadas.'
-      ],
-      link: 'https://sofamatch.com/collections/sofas/products/sofa-worcester-quantum-ash'
-    },
-    {
-      title: 'SOFÁ ROSEN',
-      rating: 4.7,
-      position: 2,
-      description: [
-        'Elegancia y confort.',
-        'Asiento amplio y respaldo firme.',
-        'Maderas certificadas.'
-      ],
-      link: 'https://sofamatch.com/collections/sofas/products/sofa-rosen-sofamatch-tela-quantum-patas-natural'
-    },
-    {
-      title: 'Sofa Cama Aqua',
-      rating: 4.3,
-      position: 3,
-      description: [
-        'Elegancia y confort.',
-        'Asiento amplio y respaldo firme.',
-        'Maderas certificadas.'
-      ],
-      link: 'https://www.amazon.com.mx/dp/B085T9KB7F?tag=mjmrcs-20&linkCode=osi&th=1&psc=1&keywords=sofas%20Moblecasa'
-    },
-    {
-      title: 'Usuma Sillón ',
-      rating: 3.8,
-      position: 4,
-      description: [
-        'Elegancia y confort.',
-        'Asiento amplio y respaldo firme.',
-        'Maderas certificadas.'
-      ],
-      link: 'https://www.alameda.mx/collections/sillones-y-sofas-3-plazas/products/usum-sillon-2-o-3-plazas-de-madera-de-pino-varios-colores'
-    },
-    {
-      title: 'SOFÁ 5',
-      rating: 3.5,
-      position: 5,
-      description: [
-        'Elegancia y confort.',
-        'Asiento amplio y respaldo firme.',
-        'Maderas certificadas.'
-      ],
-      link: 'https://sofamatch.com/collections/sofas/products/sofa-worcester-quantum-ash'
-    }
-  ];
+  const [dataApi, setDataApi] = useState([]);
+
+  useEffect(() => {
+    fetch('http://35.238.232.66:1337/api/sofas')
+      .then((response) => response.json())
+      .then((data) => setDataApi(data.data));
+  }, []);
 
   return (
     <Layout>
@@ -81,30 +31,21 @@ const IndexPage = () => {
         </div>
       </div>
 
-      {/* <CardSofa
-        title="SOFÁ WORCESTER"
-        rating={5}
-        image="https://cdn.shopify.com/s/files/1/0598/0438/5441/products/d095d081-348a-4b72-806b-727ffcf75d25_1100x.png"
-        description={[
-          'Elegancia y confort.',
-          'Asiento amplio y respaldo firme.',
-          'Maderas certificadas.'
-        ]}
-        link="https://sofamatch.com/collections/sofas/products/sofa-worcester-quantum-ash"
-      /> */}
-
-      {data.map((item, i) => {
-        return (
-          <CardSofa
-            key={i}
-            title={item.title}
-            rating={item.rating}
-            description={item.description}
-            link={item.link}
-            position={item.position}
-          />
-        );
-      })}
+      {dataApi
+        .sort((a, b) => b.attributes.Rating - a.attributes.Rating)
+        .map((item, i) => {
+          return (
+            <CardSofa
+              key={i}
+              title={item.attributes.Title}
+              rating={item.attributes.Rating}
+              description={item.attributes.Description}
+              link={item.attributes.link}
+              position={item.attributes.position}
+              image={item.attributes.ImageLink}
+            />
+          );
+        })}
 
       <div className="index-description">
         <p>

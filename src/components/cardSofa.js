@@ -1,5 +1,4 @@
 import React from 'react';
-import { StaticImage } from 'gatsby-plugin-image';
 import Rating from '@mui/material/Rating';
 import '../styles/cardSofa.css';
 
@@ -31,28 +30,12 @@ const CardSofa = (props) => {
           </h3>
         </div>
         <div className="card-image">
-          {props.position === 1 ? (
-            <StaticImage src="../images/worcester.png" width={400} quality={95} alt={props.title} />
-          ) : props.position === 2 ? (
-            <StaticImage src="../images/2.jpeg" width={400} quality={95} alt={props.title} />
-          ) : props.position === 3 ? (
-            <StaticImage src="../images/3.jpg" width={400} quality={95} alt={props.title} />
-          ) : props.position === 4 ? (
-            <StaticImage src="../images/4.png" width={400} quality={95} alt={props.title} />
-          ) : props.position === 5 ? (
-            <StaticImage src="../images/5.jpeg" width={400} quality={95} alt={props.title} />
-          ) : (
-            <p>NO HAY IMAGEN</p>
-          )}
+          <img src={props.image} width={400} alt={props.title} />
         </div>
 
         <div className="card-attributes">
           <h4>{props.title}</h4>
-          <ul style={{ listStyleImage: `url('../../cheque.png')` }}>
-            {props.description.map((item, i) => {
-              return <li key={i}>{item}</li>;
-            })}
-          </ul>
+          <p>{`${props.description.substring(0, 60)}...`}</p>
         </div>
         <div className="card-url">
           <a href={props.link} target="_blank">

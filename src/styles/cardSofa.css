@@ -43,9 +43,11 @@
   text-transform: uppercase;
 }
 
-.card-attributes ul li {
+.card-attributes p {
   margin: 0.2em auto;
   text-align: left;
+  font-size: 0.75rem;
+  line-height: 1rem;
 }
 
 .card-url a {
