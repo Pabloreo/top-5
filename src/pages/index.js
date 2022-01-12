@@ -40,7 +40,7 @@ const IndexPage = () => {
               title={item.attributes.Title}
               rating={item.attributes.Rating}
               description={item.attributes.Description}
-              link={item.attributes.link}
+              link={item.attributes.Link}
               position={item.attributes.position}
               image={item.attributes.ImageLink}
             />
