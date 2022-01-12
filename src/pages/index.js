@@ -12,7 +12,7 @@ const IndexPage = () => {
   const [dataApi, setDataApi] = useState([]);
 
   useEffect(() => {
-    fetch('http://35.238.232.66:1337/api/sofas')
+    fetch('https://api.sofas.mx/api/sofas')
       .then((response) => response.json())
       .then((data) => setDataApi(data.data));
   }, []);
